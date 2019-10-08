@@ -114,49 +114,48 @@ import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 
 export default {
-  name: "app",
-  data: function() {
-    return {
-      prefix: "",
-      sufix: "",
-      prefixes: ["Air", "Jet", "Flight"],
-      sufixes: ["Hub", "Station", "Mart"]
-    };
-  },
-  methods: {
-    addPrefix(prefix) {
-      this.prefixes.push(prefix);
-      this.prefix = "";
-    },
-    addSufix(sufix) {
-      this.sufixes.push(sufix);
-      this.sufix = "";
-    },
-    deletePrefix(prefix) {
-      this.prefixes.splice(this.prefixes.indexOf(prefix), 1);
-    },
-    deleteSufix(sufix) {
-      this.sufixes.splice(this.sufixes.indexOf(sufix), 1);
-    }
-  },
-  computed: {
-    domains() {
-      console.log("generating domains");
-      const domains = [];
-      for (const prefix of this.prefixes) {
-        for (const sufix of this.sufixes) {
-          const name = prefix + sufix;
-          const url = name.toLowerCase();
-          const checkout = `https://checkout.hostgator.com.br/?a=add&sld=${url}&tld=.com.br`;
-          domains.push({
-            name,
-            checkout
-          });
-        }
-      }
-      return domains;
-    }
-  }
+	name: "app",
+	data: function() {
+		return {
+			prefix: "",
+			sufix: "",
+			prefixes: ["Air", "Jet", "Flight"],
+			sufixes: ["Hub", "Station", "Mart"]
+		};
+	},
+	methods: {
+		addPrefix(prefix) {
+			this.prefixes.push(prefix);
+			this.prefix = "";
+		},
+		addSufix(sufix) {
+			this.sufixes.push(sufix);
+			this.sufix = "";
+		},
+		deletePrefix(prefix) {
+			this.prefixes.splice(this.prefixes.indexOf(prefix), 1);
+		},
+		deleteSufix(sufix) {
+			this.sufixes.splice(this.sufixes.indexOf(sufix), 1);
+		}
+	},
+	computed: {
+		domains() {
+			const domains = [];
+			for (const prefix of this.prefixes) {
+				for (const sufix of this.sufixes) {
+					const name = prefix + sufix;
+					const url = name.toLowerCase();
+					const checkout = `https://checkout.hostgator.com.br/?a=add&sld=${url}&tld=.com.br`;
+					domains.push({
+						name,
+						checkout
+					});
+				}
+			}
+			return domains;
+		}
+	}
 };
 </script>
 
